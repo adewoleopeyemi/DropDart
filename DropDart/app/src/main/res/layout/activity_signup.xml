@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup"
+    android:background="@drawable/colored_background">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true">
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="15dp"
+            android:id="@+id/logo"
+            android:elevation="10dp"
+            app:cardElevation="10dp"
+            android:background="@android:color/transparent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/dropdartlogomain"
+                android:scaleType="centerCrop"
+                />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/CardVIewFirstRelLayout"
+        android:elevation="20dp"
+        app:cardElevation="20dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transparent_edittext"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/FirstRelLayout">
+            <androidx.cardview.widget.CardView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="15dp"
+                android:id="@+id/usericon">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/user_icon"
+                    android:scaleType="centerCrop"
+                    />
+            </androidx.cardview.widget.CardView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="Email"
+                    android:textColorHint="@android:color/black"
+                    android:layout_toRightOf="@+id/usericon"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@android:color/black">
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/CardViewSecondRelLayout"
+        android:elevation="20dp"
+        app:cardElevation="20dp"
+        android:layout_below="@id/CardVIewFirstRelLayout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transparent_edittext"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/FirstRelLayout"
+            android:id="@+id/SecondRelLayout">
+            <androidx.cardview.widget.CardView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="15dp"
+                android:id="@+id/usericon2">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/password_icon"
+                    android:scaleType="centerCrop"
+                    />
+            </androidx.cardview.widget.CardView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_toRightOf="@+id/usericon2"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="Password"
+                    android:backgroundTint="@android:color/black"
+                    >
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardViewbtnSignin"
+        android:elevation="10dp"
+        app:cardElevation="10dp"
+        android:layout_below="@id/CardViewSecondRelLayout"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/signup"
+            android:height="15dp"
+            android:textSize="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign In"
+            android:background="@drawable/transparent_edittext">
+        </Button>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardViewbtnSignin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:elevation="10dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:id="@+id/SignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Sign in here"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/transparent_edittext"/>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
