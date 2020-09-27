@@ -1,8 +1,10 @@
 package com.example.dropdart;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,51 +23,70 @@ public class signup extends AppCompatActivity {
     private EditText EmailId, Password;
     private Button btnSignUp;
     private TextView SignIn;
+    ProgressDialog progressDialog;
+
     FirebaseAuth mFirebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setTitle("Create Account");
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setDisplayShowHomeEnabled(true);
         mFirebaseAuth = FirebaseAuth.getInstance();
         EmailId = (EditText)findViewById(R.id.email);
         Password = (EditText) findViewById(R.id.password);
         btnSignUp  = (Button) findViewById(R.id.signup);
         SignIn = (TextView) findViewById(R.id.SignIn);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Registering User...");
         setOnClickListeners();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     private void setOnClickListeners() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String email = EmailId.getText().toString();
                 String password = Password.getText().toString();
                 if (email.isEmpty()){
                     EmailId.setError("Please enter Email Address");
-                    EmailId.requestFocus();
+                    EmailId.setFocusable(true);
                 }
                 else if (password.isEmpty()){
                     Password.setError("please enter a valid Password");
-                    Password.requestFocus();
+                    Password.setFocusable(true);
                 }
                 else if (password.isEmpty() && email.isEmpty()){
                     Toast.makeText(signup.this, "Fields are Empty", Toast.LENGTH_SHORT).show();
                 }
                 else if (!password.isEmpty() && !email.isEmpty()){
+                    progressDialog.show();
                     mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signup.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
+                                progressDialog.dismiss();
                                 Toast.makeText(signup.this, "signup unsuccessful, Please Try Again", Toast.LENGTH_SHORT).show();
                             }
                             else{
+                                progressDialog.dismiss();
                                 //Redirect to Home activity
-                                startActivity(new Intent(signup.this, HomePage.class));
+                                startActivity(new Intent(signup.this, ProfileActivity.class));
+                                finish();
                             }
                         }
                     });
                 }else{
+                    progressDialog.dismiss();
                     Toast.makeText(signup.this, "Error Occured!!, Please Try Again", Toast.LENGTH_SHORT).show();
                 }
             }

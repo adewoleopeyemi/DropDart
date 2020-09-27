@@ -1,17 +1,23 @@
 package com.example.dropdart;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +27,8 @@ public class login extends AppCompatActivity {
     private EditText emailID, Password;
     private Button btnLogin, btnSignUp;
     FirebaseAuth mFirebaseAuth;
+    private TextView mRecoverPassTv;
+
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,7 @@ public class login extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.LoginPassword);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnSignUp = (Button)findViewById(R.id.btnSignup);
+        mRecoverPassTv = (TextView)findViewById(R.id.forgotPasswordtv);
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -48,6 +57,13 @@ public class login extends AppCompatActivity {
         setOnClickListeners();
     }
     private void setOnClickListeners(){
+        mRecoverPassTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRecoverPasswordDialog();
+                finish();
+            }
+        });
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +104,54 @@ public class login extends AppCompatActivity {
                 }else{
                     Toast.makeText(login.this, "Error Occured!!, Please Try Again", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void showRecoverPasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Recover Password");
+        LinearLayout linearlayout = new LinearLayout(this);
+        final EditText emailEt = new EditText(this);
+        emailEt.setHint("Email");
+        emailEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        emailEt.setMinEms(10);
+
+        linearlayout.addView(emailEt);
+        linearlayout.setPadding(10, 10, 10, 10);
+        builder.setView(linearlayout);
+
+        builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String email = emailEt.getText().toString();
+                beginRecovery(email);
+            }
+        });
+        builder.setNegativeButton("Canceled", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private void beginRecovery(String email) {
+        mFirebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(login.this, "Email sent", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(login.this, "Failed....", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(login.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
