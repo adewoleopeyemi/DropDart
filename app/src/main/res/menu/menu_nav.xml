@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home_back">@color/colorBlue</item>
+    <item android:id="@+id/nav_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile_back"/>
+    <item android:id="@+id/nav_users"
+        android:title="Home"
+        android:icon="@drawable/ic_Users_back" />
+</menu>

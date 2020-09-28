@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1EDED"
+    tools:context=".ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:background="@color/colorBlue"></RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp">
+            <ImageView
+                android:id="@+id/avatarIv"
+                android:layout_marginTop="8dp"
+                android:layout_width="100dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_add_image"
+                android:background="@color/colorDarkBlue"
+                android:layout_marginLeft="20dp"
+                android:layout_height="120dp"></ImageView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/nameTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="15sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="7dp"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/emailTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textSize="15sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="7dp"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/phoneTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:textSize="15sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="7dp"
+                    ></TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
